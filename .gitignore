@@ -4,3 +4,5 @@ reports/
 dist/
 download/
 lib/Doctrine/Common/
+
+.idea
