@@ -111,7 +111,7 @@ class Statement implements \IteratorAggregate, DriverStatement
      * @param integer $type The PDO binding type.
      * @return boolean TRUE on success, FALSE on failure.
      */
-    public function bindParam($name, &$var, $type = PDO::PARAM_STR)
+    public function bindParam($name, &$var, $type = PDO::PARAM_STR, $length = null)
     {
         return $this->stmt->bindParam($name, $var, $type);
     }
