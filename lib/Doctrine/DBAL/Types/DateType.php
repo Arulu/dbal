@@ -40,6 +40,10 @@ class DateType extends Type
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
+		// TODO: this a terrible, terrible hack to allow composite primary keys with date!
+		if(is_string($value))
+			$value = $this->parseDateField($value);
+
         return ($value !== null)
             ? $value->format($platform->getDateFormatString()) : null;
     }
@@ -56,4 +60,15 @@ class DateType extends Type
         }
         return $val;
     }
+
+	private function parseDateField($value)
+	{
+		$value = explode("-", $value);
+
+		$date = new \DateTime();
+		$date->setDate($value[2], $value[1], $value[0]);
+		$date->setTime($value[3], $value[4], $value[5]);
+
+		return $date;
+	}
 }
